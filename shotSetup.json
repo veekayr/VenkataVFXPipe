@@ -1,0 +1,34 @@
+{
+	"windowsPath" 		: [
+							"E:/Pipeline",
+							"E:/Anim"
+						],
+	"macPath"			: [
+							"/disks/nas2/Pipeline",
+							"/disks/nas0/Anim"
+						],
+	"linuxPath" 		: [
+							"/mnt/job"
+						],
+
+	"jobPathNuke" 		: "common/nuke",
+	"jobPathMaya" 		: "common/maya",
+	"jobPathScripts" 	: "common/python",
+
+	"showNameWin"		: 1,
+	"seqNameWin" 		: 2,
+	"shotNameWin" 		: 3,
+	
+	"showNameOsx"		: 1,
+	"seqNameOsx"		: 2,
+	"shotNameOsx"		: 3,
+
+	"showNameLin"		: 1,
+	"seqNameLin"		: 2,
+	"shotNameLin"		: 3,
+
+	"nkOutputPath"		: "[JOB]/shot/[SEQ]/[SHOT]/img/output/2D/",
+	"renderOutputPath"	: "[JOB]/shots/[SEQ]/[SHOT]/img/output/3D/"
+
+}
+
