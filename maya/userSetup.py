@@ -3,7 +3,7 @@ import maya.utils as utils
 import maya.mel as mel
 import os, sys
 
-def setupMayaPipe():
+def createMayaPipeline():
 
     import pipelineSetup 
     import mayaUtils
@@ -26,4 +26,4 @@ def setupMayaPipe():
         print mayaJobPath
         sys.path.append(mayaJobPath)
 
-utils.executeDeferred('setupMayaPipe()') # wait until maya is ready to do the real work here...
+utils.executeDeferred('createMayaPipeline()') # wait until maya is ready to do the real work here...

@@ -27,7 +27,7 @@ jFile.close()
 
 ### Here you can customize how to get your show/shot/sequence/version information
 
-def getPathData(inputPath):
+def retrieveShotPath(inputPath):
     '''
     This gets the path data (extracting show, seq, shot ot jData dict)
     This uses the criteria specified in the shotSetup
@@ -49,31 +49,8 @@ def getPathData(inputPath):
         shot = int(jData['shotNameLin'])
 
     return ({'job':inputPath.split('/')[show],'seq':inputPath.split('/')[seq],'shot':inputPath.split('/')[shot]})
-'''
-def showName(inputPath):
-    jFile = open('%s/shotSetup' % os.environ['pipelineSetupPATH'])
-    jData = json.load(jFile)
-    jFile.close()
-    inputPath = inputPath.replace('\\','/')
-    return inputPath.split('/')[jData['showName']]
 
-
-def seqName(inputPath):
-    jFile = open('%s/shotSetup' % os.environ['pipelineSetupPATH'])
-    jData = json.load(jFile)
-    jFile.close()
-    inputPath = inputPath.replace('\\','/')
-    return inputPath.split('/')[jData['seqName']]
-
-def shotName(inputPath):
-    jFile = open('%s/shotSetup' % os.environ['pipelineSetupPATH'])
-    jData = json.load(jFile)
-    jFile.close()
-    inputPath = inputPath.replace('\\','/')
-    return inputPath.split('/')[jData['shotName']]
-'''
-
-def versionNumber(inputPath):
+def shotVersion(inputPath):
     '''
     Extract the version information from a given path/string
     returns v000 (3 pad versions)
@@ -87,28 +64,28 @@ def versionNumber(inputPath):
         versionData = versionData.group(0)
     return versionData
 
-def framePad(inputPath):
+def shotFrame(inputPath):
     '''
     Finds the frame padding.  Searches for %04d (or any # in there)
     Also searches for #### string and then returns a %04d
     '''
     pattern = re.compile(r'%[0-9]+d')
-    framePadData = pattern.findall(inputPath)
-    if framePadData:
-        out = framePadData[0]
+    shotFrameData = pattern.findall(inputPath)
+    if shotFrameData:
+        out = shotFrameData[0]
         outFormat = out
     
-    if not framePadData:
+    if not shotFrameData:
         pattern = re.compile(r'#')
-        framePadData = pattern.findall(inputPath)
+        shotFrameData = pattern.findall(inputPath)
         out = ''
-        for n in range(len(framePadData)):
-            out = out + framePadData[n]
-        outFormat = '%' + '0%0dd' % (len(framePadData))
+        for n in range(len(shotFrameData)):
+            out = out + shotFrameData[n]
+        outFormat = '%' + '0%0dd' % (len(shotFrameData))
     return out, outFormat
 
-def framePadReplace(inputPath, replaceNumber):
-    padString, padFormat = framePad(inputPath)
+def shotFrameReplace(inputPath, replaceNumber):
+    padString, padFormat = shotFrame(inputPath)
     paddedNumber = padFormat % (int(replaceNumber))
     return (inputPath.replace(padString, paddedNumber))
 
